@@ -1,0 +1,3 @@
+package com.example.shortener.feature.tag.service;
+import com.example.shortener.feature.tag.entity.Tag; import com.example.shortener.feature.tag.repository.TagRepository; import org.springframework.stereotype.Service; import org.springframework.transaction.annotation.Transactional; import java.util.*;
+@Service public class TagService { private final TagRepository repo; public TagService(TagRepository repo){this.repo=repo;} @Transactional public Set<Tag> resolveAll(String raw){Set<Tag> result=new HashSet<>(); if(raw==null)return result; for(String s:raw.split(",")){String name=s.trim(); if(!name.isBlank())result.add(repo.findByName(name).orElseGet(()->repo.save(new Tag(name))));} return result;}}

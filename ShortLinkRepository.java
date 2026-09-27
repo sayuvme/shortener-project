@@ -1,0 +1,3 @@
+package com.example.shortener.feature.link.repository;
+import com.example.shortener.feature.link.entity.ShortLink; import org.springframework.data.domain.*; import org.springframework.data.jpa.repository.*; import org.springframework.data.repository.query.Param; import java.util.*;
+public interface ShortLinkRepository extends JpaRepository<ShortLink,Long>{Optional<ShortLink> findByCode(String code); Page<ShortLink> findByUserId(Long userId,Pageable pageable); boolean existsByCode(String code); @Query("select l from ShortLink l where l.user.id=:uid and (lower(l.originalUrl) like lower(concat('%',:q,'%')) or lower(l.code) like lower(concat('%',:q,'%')))") Page<ShortLink> search(@Param("uid") Long uid,@Param("q") String q,Pageable pageable);}

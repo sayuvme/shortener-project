@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/shortener
+    username: shortener_user
+    password: shortener_pass
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  thymeleaf:
+    cache: false
+server:
+  port: 8080
+app:
+  base-url: http://localhost:8080
+  geo-api-url: https://ipapi.co
+logging:
+  level:
+    com.example.shortener: INFO
